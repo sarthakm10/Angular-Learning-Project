@@ -22,3 +22,12 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
+## Learning
+    1. prefix in angular.json
+        "prefix" is used to define the prefix for component selectors
+        It is a good practice to use a unique prefix to avoid conflicts with other libraries or components
+        In this case, "robot-shop" is used as the prefix for the components in this project
+    2. assets in angular.json
+        "src/assets" this allows us to use images in the static content
+        we can mention more folder here for our use
+
