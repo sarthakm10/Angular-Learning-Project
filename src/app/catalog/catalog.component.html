@@ -21,14 +21,20 @@
             it would not change the value in the components 
           -->
           <div class="product-info">
-            <div class="name">{{ product.name }}</div>
+            <div class="name">{{ product?.name }}</div>
             <!-- product.name is known as data interpolation -->
-            <div class="description">{{ product.description }}</div>
-            <div class="category">Part Type: {{ product.category }}</div>
+            <div class="description">{{ product?.description }}</div>
+            <!-- ? operator is known as the safe navigation operator 
+                it prevents errors if product is null or undefined 
+            -->
+            <div class="category">Part Type: {{ product?.category }}</div>
           </div>
         </div>
         <div class="price">
-          <div>${{ product.price.toFixed(2) }}</div>
+          <div *ngIf="product.discount === 0">{{ product?.price | currency:'INR' }}</div>
+          <div *ngIf="product.discount > 0" class="discount">
+            {{ (product?.price * (1 - product?.discount)) | currency:'INR' }}
+          </div>
           <button class="cta">Buy</button>
         </div>
       </div>
