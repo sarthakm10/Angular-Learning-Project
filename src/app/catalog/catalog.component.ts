@@ -188,7 +188,7 @@ export class CatalogComponent {
       ];
     }
 
-    getImageUrl(product: any) {
+    getImageUrl(product: IProduct) {
       if (!product) return '';
       return '/assets/images/robot-parts/' + product.imageName;
     }
@@ -198,4 +198,8 @@ export class CatalogComponent {
       ? this.products
       : this.products.filter((product: any) => product.category === this.filter);
   }
+
+    getDiscountedClass(product: IProduct){
+      return product.discount > 0 ? ['strikethrough'] : [];
+    }
 }

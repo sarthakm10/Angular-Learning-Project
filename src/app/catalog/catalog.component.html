@@ -31,7 +31,23 @@
           </div>
         </div>
         <div class="price">
-          <div *ngIf="product.discount === 0">{{ product?.price | currency:'INR' }}</div>
+          <!-- [ngClass] is a directive that allows you to add or remove classes based on conditions -->
+          <!-- it takes an object where the keys are the class names and the values are boolean expressions
+            that determine whether the class should be applied or not. -->
+          <!-- [ngClass] is used to conditionally apply a class based on a condition -->
+          <!-- if product.discount is greater than 0, the strikethrough class will be applied -->
+          <!-- <div [ngClass]="{ strikethrough: product.discount > 0 }"> -->
+          <div 
+            [ngStyle]="{color : product.discount > 0 ? 'red' : ' '}"
+            [ngClass]="getDiscountedClass(product)">
+            <!-- getDiscountedClass is a method that returns the class name based on the condition -->
+            <!-- this is an example of method binding -->
+            <!-- if product.discount is greater than 0, the strikethrough class will be applied -->
+            <!-- if product.discount is not greater than 0, no class will be applied -->
+          <!-- <div [class.strikethrough]="product.discount > 0"> -->
+            <!-- [class.strikethrough] this is called class binding -->
+            {{ product?.price | currency:'INR' }}
+          </div>
           <div *ngIf="product.discount > 0" class="discount">
             {{ (product?.price * (1 - product?.discount)) | currency:'INR' }}
           </div>
