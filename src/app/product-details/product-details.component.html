@@ -1,0 +1,45 @@
+<div class="product">
+        <div class="product-details">
+          <img [src]="getImageUrl(product)" [alt]="product.name" />
+          <!-- <img [src]="'/assets/images/robot-parts/' + product.imageName" [alt]="product.name" /> -->
+          <!-- <img src="{{ '/assets/images/robot-parts/' + product.imageName }}" [alt]="product.name" /> -->
+          <!-- [alt] adding the brackets to the attribute name causes Angular to evaluate this as an expression  -->
+          <!-- square brackets create a one‑way binding from the component to the template. -->
+          <!--  if the data changed in the component, it would change the value of the input box. 
+            But if the user changed the value of the input box by typing something into the box, 
+            it would not change the value in the components 
+          -->
+          <div class="product-info">
+            <div class="name">{{ product?.name }}</div>
+            <!-- product.name is known as data interpolation -->
+            <div class="description">{{ product?.description }}</div>
+            <!-- ? operator is known as the safe navigation operator 
+                it prevents errors if product is null or undefined 
+            -->
+            <div class="category">Part Type: {{ product?.category }}</div>
+          </div>
+        </div>
+        <div class="price">
+          <!-- [ngClass] is a directive that allows you to add or remove classes based on conditions -->
+          <!-- it takes an object where the keys are the class names and the values are boolean expressions
+            that determine whether the class should be applied or not. -->
+          <!-- [ngClass] is used to conditionally apply a class based on a condition -->
+          <!-- if product.discount is greater than 0, the strikethrough class will be applied -->
+          <!-- <div [ngClass]="{ strikethrough: product.discount > 0 }"> -->
+          <div 
+            [ngStyle]="{color : product.discount > 0 ? 'red' : ' '}"
+            [ngClass]="getDiscountedClass(product)">
+            <!-- getDiscountedClass is a method that returns the class name based on the condition -->
+            <!-- this is an example of method binding -->
+            <!-- if product.discount is greater than 0, the strikethrough class will be applied -->
+            <!-- if product.discount is not greater than 0, no class will be applied -->
+          <!-- <div [class.strikethrough]="product.discount > 0"> -->
+            <!-- [class.strikethrough] this is called class binding -->
+            {{ product?.price | currency:'INR' }}
+          </div>
+          <div *ngIf="product.discount > 0" class="discount">
+            {{ ((product?.price ?? 0) * (1 - (product?.discount ?? 0))) | currency:'INR' }}
+          </div>
+          <button class="cta" (click)="buyButtonClicked(product)">Buy</button>
+        </div>
+      </div>
