@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IProduct } from './product.modal';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'robot-shop-catalog',
@@ -9,7 +10,10 @@ import { IProduct } from './product.modal';
 export class CatalogComponent {
     products: any;
     filter: string = '';
-    cart: IProduct[] = [];
+    private cartService: CartService = inject(CartService);
+    // The CartService is injected to allow adding products to the cart
+    // The inject function is used to get an instance of CartService
+    // This allows the component to access the methods of CartService
 
     constructor() {
         this.products = [
@@ -189,10 +193,10 @@ export class CatalogComponent {
       ];
     }
 
-    addToCart(product: IProduct) {
-      this.cart.push(product);
-      console.log(`product ${product.name} added to cart`);
-    }
+  addToCart(product: IProduct) {
+    this.cartService.add(product);
+    // This method calls the add method from CartService to add the product to the cart
+  }
 
     getFilteredProducts() {
     return this.filter === ''
