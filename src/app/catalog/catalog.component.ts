@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { IProduct } from './product.modal';
-import { CartService } from '../cart.service';
 import { ProductService } from './product.service';
+import { CartService } from '../cart/cart.service';
 
 @Component({
   selector: 'robot-shop-catalog',
