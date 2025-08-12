@@ -28,10 +28,15 @@ export class CartService {
   }
 
   remove(product: IProduct) {
-    let newCart = this.cart.getValue().filter((i) => i !== product);
-    this.cart.next(newCart);
-    this.http.post('/api/cart', newCart).subscribe(() => {
-      console.log('removed ' + product.name + ' from cart!');
-    });
+    const currentCart = this.cart.getValue();
+    const index = currentCart.indexOf(product);
+    if (index > -1) {
+      const newCart = [...currentCart];
+      newCart.splice(index, 1);
+      this.cart.next(newCart);
+      this.http.post('/api/cart', newCart).subscribe(() => {
+        console.log('removed ' + product.name + ' from cart!');
+      });
+    }
   }
 }

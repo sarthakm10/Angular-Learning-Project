@@ -65,3 +65,24 @@
   top: 60px;
   right: 30px;
 }
+
+.cart a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cart-badge {
+  background-color: #ff69b4;
+  color: white;
+  border-radius: 100%;
+  padding: 2px 6px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -8px;
+}
